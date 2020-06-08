@@ -40,6 +40,7 @@
             transform: translateX(1rem);
         }
         }
+
     }
 
     .kasten {
@@ -67,6 +68,10 @@
             display: inline-flex;
             background: $color-white;
             height: auto;
+
+            @include respond(S) {
+                display: none;
+            }
 
             .div1 {
                padding: 0 3rem;

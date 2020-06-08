@@ -6344,6 +6344,12 @@ body {
   height: auto;
 }
 
+@media only screen and (max-width: 56.25em) {
+  .header .kasten--nav {
+    display: none;
+  }
+}
+
 .header .kasten--nav .div1 {
   padding: 0 3rem;
 }
@@ -6556,11 +6562,12 @@ body {
     height: 85rem;
     padding: 10rem 0;
     margin-top: -8rem;
-    /*  transform: skewY(-7deg);
-
-        & > * {
+    -webkit-transform: skewY(-7deg);
+            transform: skewY(-7deg);
+  }
+  .section-features > * {
+    -webkit-transform: skewY(7deg);
             transform: skewY(7deg);
-        }*/
   }
 }
 
@@ -6569,11 +6576,12 @@ body {
     height: 155rem;
     padding: 10rem 0;
     margin-top: -9rem;
-    /* transform: skewY(-14deg);
-
-        & > * {
+    -webkit-transform: skewY(-14deg);
+            transform: skewY(-14deg);
+  }
+  .section-features > * {
+    -webkit-transform: skewY(14deg);
             transform: skewY(14deg);
-        }*/
   }
 }
 

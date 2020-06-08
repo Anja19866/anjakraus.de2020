@@ -15,30 +15,39 @@
     
     
         &__link {
-        &:link,
-        &:visited {
-            display: inline-block;
-            font-size: 2rem;
-            font-weight: 300;
-            padding: 1rem 2rem;
-            color: $color-primary-dark;
-            text-decoration: none;
-            background-image: linear-gradient(120deg, transparent 0%, transparent 50%, $color-white 50%);
-            background-size: 220%;
-            transition: all .4s;
-    
-            span {
-                margin-right: 1.5rem;
+            
+            &:link,
+            &:visited {
                 display: inline-block;
-            }
-        }
+                font-size: 2rem;
+                font-weight: 300;
+                padding: 1rem 2rem;
+                color: $color-primary-dark;
+                text-decoration: none;
+                background-image: linear-gradient(120deg, transparent 0%, transparent 50%, $color-white 50%);
+                background-size: 220%;
+                transition: all .4s;
         
-        &:hover,
-        &:active {
-            background-position: 100%;
-            color: $color-grey-dark;
-            transform: translateX(1rem);
-        }
+                span {
+                    margin-right: 1.5rem;
+                    display: inline-block;
+                }
+
+                @include respond(L) {
+                    font-size: 1.5rem;
+                    padding: 1rem;
+                }
+            }
+        
+            &:hover,
+            &:active {
+                background-position: 100%;
+                color: $color-grey-dark;
+                transform: translateX(1rem);
+            }
+
+            
+
         }
 
     }
@@ -46,22 +55,45 @@
     .kasten {
         background-image: linear-gradient(to right, transparent, #64969f);
         background-size: cover;
-        max-height: 53rem;
+        
         display: inline-flex;
+        flex-wrap: wrap;
         width: 100%;
-        
-        
+
         .div {
             text-align: center;            
         }
         
+        .div1 {
+            
+            @include respond(M) {
+                margin: 3rem;
+            }
+
+        }
+
+
         .div2 {
             padding: 10rem 0;
+            max-height: 60rem;
+
+            
+            @include respond(M) {
+                padding: 2rem;
+                margin: 0 auto;
+            }
+
             
         }
         
         img {
             margin-bottom: -.5rem;
+
+            
+            @include respond(M) {
+              width: 100%;
+            }
+
         }
 
         &--nav {
@@ -69,16 +101,21 @@
             background: $color-white;
             height: auto;
 
-            @include respond(S) {
-                display: none;
-            }
-
             .div1 {
                padding: 0 3rem;
+
+               @include respond(M) {
+                padding: 0 0 0 2rem;
+                }
+
             }
 
             .div2 {
                 padding: 0;
+
+                @include respond(S) {
+                    display: none;
+                }
             }
         }
     }

@@ -1,0 +1,599 @@
+// Grid-System aus materializecss übernommen.
+
+// Media Query Ranges
+$extra-small-screen-up: 401px !default;
+$small-screen-up: 601px !default;
+$medium-screen-up: 993px !default;
+$large-screen-up: 1201px !default;
+
+$extra-small-screen: 400px !default;
+$small-screen: 600px !default;
+$extra-medium-screen: 720px !default;
+$medium-screen: 992px !default;
+$large-screen: 1200px !default;
+
+
+$small-and-up: "only screen and (min-width : #{$extra-small-screen-up})" !default;		//  401
+$medium-and-up: "only screen and (min-width : #{$small-screen-up})" !default;			//  601
+$large-and-up: "only screen and (min-width : #{$medium-screen-up})" !default;			//  993
+$extra-large-and-up: "only screen and (min-width : #{$large-screen-up})" !default;		// 1201
+
+$small-and-up-extra-medium: "only screen and (min-width : #{$small-screen-up}) and (max-width : #{$extra-medium-screen})" !default;		// 601 und 720
+
+$extra-small-and-down: "only screen and (max-width : #{$extra-small-screen})" !default;	//  400
+$small-and-down: "only screen and (max-width : #{$small-screen})" !default;				//  600
+$medium-and-down: "only screen and (max-width : #{$medium-screen})" !default;			//  992
+$extra-medium-and-down: "only screen and (max-width : #{$extra-medium-screen})" !default;			//  992
+$large-and-down: "only screen and (max-width : #{$large-screen})" !default;				// 1200
+
+$large-only: "only screen and (min-width : #{$medium-screen-up}) and (max-width : #{$large-screen})" !default;
+$medium-only: "only screen and (min-width : #{$small-screen-up}) and (max-width : #{$medium-screen})" !default;
+$small-only: "only screen and (min-width : #{$extra-small-screen-up}) and (max-width : #{$small-screen})" !default;
+
+
+$num-cols: 24 !default;
+$gutter-width: 3rem !default; // 1rem = 10px, 2rem = 20px, 3rem = 30px,
+$element-top-margin: $gutter-width/3 !default;
+$element-bottom-margin: ($gutter-width*2)/3 !default;
+
+.wrapper-content  {
+	.row {
+		margin-left: (-1 * $gutter-width / 2);
+		margin-right: (-1 * $gutter-width / 2);
+
+		&_no-gutter {
+			margin-left: 0;
+			margin-right: 0;
+		}
+
+		&_small-gutter {
+			margin-left: (-1 * $gutter-width / 4);
+			margin-right: (-1 * $gutter-width / 4);
+		}
+	}
+
+	ul {
+		.row {
+			margin: 0;
+
+			.col {
+				padding: 0;
+			}
+		}
+	}
+
+	ul.menu-submenu-parent {
+		.row {
+			&.menu-item {
+				margin-left: 0;
+				margin-right: 0;
+				width: auto;
+				display: inline-block;
+
+				> .sub-menu {
+					margin-left: (-1 * $gutter-width / 2);
+					margin-right: (-1 * $gutter-width / 2);
+
+					.col {
+						padding: 0 $gutter-width / 2;
+					}
+				}
+			}
+		}
+	}
+}
+
+.row {
+	margin-left: auto;
+	margin-right: auto;
+
+	fieldset {
+		margin: 0;
+	}
+
+	// Clear floating children
+	&:after {
+		content: "";
+		display: table;
+		clear: both;
+	}
+
+	.col {
+		float: left;
+		box-sizing: border-box;
+		padding: 0 $gutter-width / 2;
+
+		&[class*="push-"],
+		&[class*="pull-"] {
+			position: relative;
+		}
+
+		$i: 1; // unter 600px
+		@while $i <= $num-cols {
+			$perc: unquote((100 / ($num-cols / $i)) + "%");
+			&.s#{$i} {
+				width: $perc;
+				margin-left: auto;
+				left: auto;
+				right: auto;
+			}
+			$i: $i + 1;
+		}
+
+		@media #{$extra-small-and-down} { // unter 400px
+			$i: 1;
+			@while $i <= $num-cols {
+				$perc: unquote((100 / ($num-cols / $i)) + "%");
+				&.xs#{$i} {
+					width: $perc;
+					margin-left: auto;
+					left: auto;
+					right: auto;
+				}
+				$i: $i + 1;
+			}
+
+			$i: 1;
+			@while $i <= $num-cols {
+				$perc: unquote((100 / ($num-cols / $i)) + "%");
+				&.o-xs#{$i} {
+					margin-left: $perc;
+				}
+				&.pull-xs#{$i} {
+					right: $perc;
+				}
+				&.push-xs#{$i} {
+					left: $perc;
+				}
+				$i: $i + 1;
+			}
+		}
+
+		$i: 1;
+		@while $i <= $num-cols {
+			$perc: unquote((100 / ($num-cols / $i)) + "%");
+			&.o-s#{$i} {
+				margin-left: $perc;
+			}
+			&.pull-s#{$i} {
+				right: $perc;
+			}
+			&.push-s#{$i} {
+				left: $perc;
+			}
+			$i: $i + 1;
+		}
+
+		@media #{$medium-and-up} { // ab 600px
+
+			$i: 1;
+			@while $i <= $num-cols {
+				$perc: unquote((100 / ($num-cols / $i)) + "%");
+				&.m#{$i} {
+					width: $perc;
+					margin-left: auto;
+					left: auto;
+					right: auto;
+				}
+				$i: $i + 1
+			}
+
+			$i: 1;
+			@while $i <= $num-cols {
+				$perc: unquote((100 / ($num-cols / $i)) + "%");
+				&.o-m#{$i} {
+					margin-left: $perc;
+				}
+				&.pull-m#{$i} {
+					right: $perc;
+				}
+				&.push-m#{$i} {
+					left: $perc;
+				}
+				$i: $i + 1;
+			}
+		}
+
+		@media #{$small-and-up-extra-medium} { // zwischen 601px und 720px
+
+			$i: 1;
+			@while $i <= $num-cols {
+				$perc: unquote((100 / ($num-cols / $i)) + "%");
+				&.xm#{$i} {
+					width: $perc;
+					margin-left: auto;
+					left: auto;
+					right: auto;
+				}
+				$i: $i + 1
+			}
+
+			$i: 1;
+			@while $i <= $num-cols {
+				$perc: unquote((100 / ($num-cols / $i)) + "%");
+				&.o-xm#{$i} {
+					margin-left: $perc;
+				}
+				&.pull-xm#{$i} {
+					right: $perc;
+				}
+				&.push-xm#{$i} {
+					left: $perc;
+				}
+				$i: $i + 1;
+			}
+		}
+
+		@media #{$large-and-up} { // ab 992px
+
+			$i: 1;
+			@while $i <= $num-cols {
+				$perc: unquote((100 / ($num-cols / $i)) + "%");
+				&.l#{$i} {
+					width: $perc;
+					margin-left: auto;
+					left: auto;
+					right: auto;
+				}
+				$i: $i + 1;
+			}
+
+			$i: 1;
+			@while $i <= $num-cols {
+				$perc: unquote((100 / ($num-cols / $i)) + "%");
+				&.o-l#{$i} {
+					margin-left: $perc;
+				}
+				&.pull-l#{$i} {
+					right: $perc;
+				}
+				&.push-l#{$i} {
+					left: $perc;
+				}
+				$i: $i + 1;
+			}
+		}
+
+		@media #{$extra-large-and-up} { // ab 1201px
+
+			$i: 1;
+			@while $i <= $num-cols {
+				$perc: unquote((100 / ($num-cols / $i)) + "%");
+				&.xl#{$i} {
+					width: $perc;
+					margin-left: auto;
+					left: auto;
+					right: auto;
+				}
+				$i: $i + 1;
+			}
+
+			$i: 1;
+			@while $i <= $num-cols {
+				$perc: unquote((100 / ($num-cols / $i)) + "%");
+				&.o-xl#{$i} {
+					margin-left: $perc;
+				}
+				&.pull-xl#{$i} {
+					right: $perc;
+				}
+				&.push-xl#{$i} {
+					left: $perc;
+				}
+				$i: $i + 1;
+			}
+		}
+	}
+
+	&_equal-height {
+		margin-bottom: -3rem;
+	}
+
+	&_no-gutter {
+		.col {
+			padding: 0;
+		}
+	}
+
+	&_small-gutter {
+		.col {
+			padding: 0 $gutter-width / 4;
+		}
+	}
+
+	&_margin-bottom {
+		margin-bottom: 20px;
+	}
+
+	&_table {
+		/*
+		 * ACHTUNG: dieser Grid (nur _table)funktioniert etwas Anders.
+		 *          hier ist $i die Anzahl von Elementen die in der Reihe dargestellt werden sollen und
+		 *          nicht die Anzahl der Spalten über die das Element geht
+		 */
+		display: table;
+		vertical-align: middle;
+		table-layout: fixed;
+		width: calc( 100% + #{$gutter-width});
+
+		> .col {
+			display: table-cell;
+			vertical-align: middle;
+
+			$i: 1; // unter 600px
+			@while $i <= $num-cols {
+				$perc: unquote((100 / $i) + "%");
+				&.s#{$i} {
+					width: $perc;
+					margin-left: auto;
+					left: auto;
+					right: auto;
+				}
+				$i: $i + 1;
+			}
+
+			$i: 1;
+			@while $i <= $num-cols {
+				$perc: unquote((100 / $i) + "%");
+				&.o-s#{$i} {
+					margin-left: $perc;
+				}
+				&.pull-s#{$i} {
+					right: $perc;
+				}
+				&.push-s#{$i} {
+					left: $perc;
+				}
+				$i: $i + 1;
+			}
+
+			@media #{$medium-and-up} { // ab 600px
+
+				$i: 1;
+				@while $i <= $num-cols {
+					$perc: unquote((100 / $i) + "%");
+					&.m#{$i} {
+						width: $perc;
+						margin-left: auto;
+						left: auto;
+						right: auto;
+					}
+					$i: $i + 1
+				}
+
+				$i: 1;
+				@while $i <= $num-cols {
+					$perc: unquote((100 / $i) + "%");
+					&.o-m#{$i} {
+						margin-left: $perc;
+					}
+					&.pull-m#{$i} {
+						right: $perc;
+					}
+					&.push-m#{$i} {
+						left: $perc;
+					}
+					$i: $i + 1;
+				}
+			}
+
+			@media #{$large-and-up} { // ab 992px
+
+				$i: 1;
+				@while $i <= $num-cols {
+					$perc: unquote((100 / $i) + "%");
+					&.l#{$i} {
+						width: $perc;
+						margin-left: auto;
+						left: auto;
+						right: auto;
+					}
+					$i: $i + 1
+				}
+
+				$i: 1;
+				@while $i <= $num-cols {
+					$perc: unquote((100 / $i) + "%");
+					&.o-l#{$i} {
+						margin-left: $perc;
+					}
+					&.pull-l#{$i} {
+						right: $perc;
+					}
+					&.push-l#{$i} {
+						left: $perc;
+					}
+					$i: $i + 1;
+				}
+			}
+
+		}
+	}
+
+	&_flex {
+		display: table;
+		display: flex;
+		vertical-align: middle;
+		justify-content: space-between;
+		align-items: stretch;
+		margin-bottom: 2.4rem;
+		flex-flow: row wrap;
+
+		/*
+		 * FLEX  FLEX  FLEX  FLEX  FLEX  FLEX  FLEX  FLEX  FLEX  FLEX  FLEX  FLEX  FLEX  FLEX
+		 */
+		> .col {
+			display: table-cell;
+			$i: 1; // unter 600px
+			@while $i <= $num-cols {
+				$perc: unquote((100 / ($num-cols / $i)) + "%");
+				&.s#{$i} {
+					flex-basis: $perc;
+					flex-grow: 1;
+					max-width: $perc;
+				}
+				$i: $i + 1;
+			}
+
+			@media #{$extra-small-and-down} { // unter 400px
+				$i: 1;
+				@while $i <= $num-cols {
+					$perc: unquote((100 / ($num-cols / $i)) + "%");
+					&.xs#{$i} {
+						width: $perc;
+						flex-basis: $perc;
+						flex-grow: 1;
+						max-width: $perc;
+						margin-left: auto;
+						left: auto;
+						right: auto;
+					}
+					$i: $i + 1;
+				}
+			}
+
+			@media #{$medium-and-up} { // ab 600px
+
+				$i: 1;
+				@while $i <= $num-cols {
+					$perc: unquote((100 / ($num-cols / $i)) + "%");
+					&.m#{$i} {
+						width: $perc;
+						flex-basis: $perc;
+						flex-grow: 1;
+						max-width: $perc;
+						margin-left: auto;
+						left: auto;
+						right: auto;
+					}
+					$i: $i + 1
+				}
+			}
+
+			@media #{$small-and-up-extra-medium} { // zwischen 601px und 720px
+
+				$i: 1;
+				@while $i <= $num-cols {
+					$perc: unquote((100 / ($num-cols / $i)) + "%");
+					&.xm#{$i} {
+						width: $perc;
+						flex-basis: $perc;
+						flex-grow: 1;
+						max-width: $perc;
+						margin-left: auto;
+					}
+					$i: $i + 1
+				}
+			}
+
+			@media #{$large-and-up} { // ab 992px
+
+				$i: 1;
+				@while $i <= $num-cols {
+					$perc: unquote((100 / ($num-cols / $i)) + "%");
+					&.l#{$i} {
+						width: $perc;
+						flex-basis: $perc;
+						flex-grow: 1;
+						max-width: $perc;
+						margin-left: auto;
+					}
+					$i: $i + 1;
+				}
+			}
+
+			@media #{$extra-large-and-up} { // ab 1201px
+				$i: 1;
+				@while $i <= $num-cols {
+					$perc: unquote((100 / ($num-cols / $i)) + "%");
+					&.xl#{$i} {
+						width: $perc;
+						flex-basis: $perc;
+						flex-grow: 1;
+						max-width: $perc;
+					}
+					$i: $i + 1;
+				}
+			}
+		}
+
+		@media #{$small-and-down} { // bis 600px
+			&.small-margin-bottom {
+				.col {
+					margin-bottom: 2.4rem;
+				}
+			}
+		}
+
+		@media #{$medium-and-down} { // bis 992px
+			&.medium-margin-bottom {
+				.col {
+					margin-bottom: 2.4rem;
+				}
+			}
+		}
+
+		@media #{$extra-medium-and-down} { // bis 720px
+			&.extra-medium-margin-bottom {
+				.col {
+					margin-bottom: 2.4rem;
+				}
+			}
+		}
+	}
+}
+
+
+/*********************
+  Media Query Classes
+**********************/
+.hide-on-small-only, .hide-on-small-and-down {
+	@media #{$small-and-down} {
+		display: none !important;
+	}
+}
+.hide-on-med-and-down {
+	@media #{$medium-and-down} {
+		display: none !important;
+	}
+}
+.hide-on-med-and-up {
+	@media #{$medium-and-up} {
+		display: none !important;
+	}
+}
+.hide-on-med-only {
+	@media only screen and (min-width: $small-screen) and (max-width: $medium-screen) {
+		display: none !important;
+	}
+}
+.hide-on-large-only {
+	@media #{$large-and-up} {
+		display: none !important;
+	}
+}
+.show-on-large {
+	@media #{$large-and-up} {
+		display: block !important;
+	}
+}
+.show-on-medium {
+	@media only screen and (min-width: $small-screen) and (max-width: $medium-screen) {
+		display: block !important;
+	}
+}
+.show-on-small {
+	@media #{$small-and-down} {
+		display: block !important;
+	}
+}
+.show-on-medium-and-up {
+	@media #{$medium-and-up} {
+		display: block !important;
+	}
+}
+.show-on-medium-and-down {
+	@media #{$medium-and-down} {
+		display: block !important;
+	}
+}

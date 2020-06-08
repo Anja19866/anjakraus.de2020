@@ -1,0 +1,28 @@
+.about {
+        
+    
+    &--moveInBottom {
+        animation: moveInBottom 1s; 
+    }
+
+    .data {
+        
+        li {
+            list-style: none;
+        }
+        
+        .tab {
+            display: inline-block;
+            width: 175px; 
+        }
+    }
+    
+    .portrait {
+        text-align: center;
+        
+        &--moveInBottom {
+            animation: moveInBottom 2s ease-in;
+        }
+        
+    }
+}
